@@ -1,23 +1,26 @@
 #include <stdio.h>
-#include <stdlib.h>
 /**
- * main - main block to be executed
- * Description: computes and prints
+ * main - block to execute
+ * Desciption: computes and prints
  * Return: 0
  */
 int main(void)
 {
-	int c = 0;
-	int sum = 0;
+	int i = 0;
+	long int a = 0, b = 1, next;
 
-	while (c < 1024)
+	while (i < 50)
 	{
-		if (c % 3 == 0 || c % 5 == 0)
+		next = a + b;
+		a = b;
+		b = next;
+		printf("%lu", next);
+		if (i < 49)
 		{
-			sum += c;
+			printf(", ");
 		}
-		c++;
+		i++;
 	}
-	printf("%i\n", sum);
+	putchar('\n');
 	return (0);
 }
