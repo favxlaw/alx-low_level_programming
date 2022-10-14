@@ -1,61 +1,33 @@
-#include "variadic_functions.h"
+#include <stdarg.h>
 #include <stdio.h>
 
 /**
- * print_strings - print a string followed by a newline
- * @separator: string to be printed between strings
- * @n: number of strings passed to function
- */
-void print_strings(const char *separator, const unsigned int n, ...)
+ * print_numbers - a function that print numbers, followed by a new line.
+ *
+ * @separator: pointer to constant separator
+ * @n: start of input variables
+ *
+ * Return: nothing
+*/
+
+void print_numbers(const char *separator, const unsigned int n, ...)
 {
-	unsigned int i;
-	va_list list;
-	char *hold;
+	va_list ap;
+	unsigned int index;
 
-	va_start(list, n);
+	/* initialize the argument list from the start */
+	va_start(ap, n);
 
-	for (i = 0; i < n; i++)
+	/* iterate through each argument*/
+	for (index = 0; index < n; index++)
 	{
-		hold = va_arg(list, char*);
-		if (hold == NULL)
-			printf("(nil)");
-		else
-			printf("%s", hold);
-
-		if (i != (n - 1) && separator != NULL)
+		/* print next argument */
+		printf("%d", va_arg(ap, int));
+		/* print separator only between arguments */
+		if (separator && index != n - 1)
 			printf("%s", separator);
 	}
+	/*clean up*/
+	va_end(ap);
 	printf("\n");
-
-	va_end(list);
-}#include "variadic_functions.h"
-#include <stdio.h>
-
-/**
- * print_strings - print a string followed by a newline
- * @separator: string to be printed between strings
- * @n: number of strings passed to function
- */
-void print_strings(const char *separator, const unsigned int n, ...)
-{
-        unsigned int i;
-        va_list list;
-        char *hold;
-
-        va_start(list, n);
-
-        for (i = 0; i < n; i++)
-        {
-                hold = va_arg(list, char*);
-                if (hold == NULL)
-                        printf("(nil)");
-                else
-                        printf("%s", hold);
-
-                if (i != (n - 1) && separator != NULL)
-                        printf("%s", separator);
-        }
-        printf("\n");
-
-        va_end(list);
 }
